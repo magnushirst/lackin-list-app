@@ -15,19 +15,14 @@ textBox.addEventListener("keydown", function (event) {
 
 //core app functionality 
 function newListItem () {
-
-  let newDiv = document.createElement("div");
-  let childParagraph = document.createElement("p")
-  
-  newDiv.classList.add("list-item");
-
   //checks for user text input in textBox
   if (textBox.value) {
-    childParagraph.textContent = `${mainListChildren.length + 1}. ${textBox.value}`;
-    listWrapper.appendChild(newDiv);
-    newDiv.appendChild(childParagraph)
+    var uniq = 'id' + (new Date()).getTime(); // a simple way to get a unique id based on time but could cause collisions if you were quick to spam submit.
+    const element = `<div class="list-item"> <p id="${uniq}"> </p> </div>`
+
+    listWrapper.innerHTML+= element
+    const mainList = document.getElementById(uniq);
+    mainList.textContent = `${mainListChildren.length}. ${textBox.value}`;
   };
-
   textBox.value = "";
-
 };
